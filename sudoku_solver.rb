@@ -225,18 +225,18 @@ class Sudoku
     # p missing_numbers
     unless (empty_spaces == "skip")
       if (empty_spaces.count() > 1)
-        @square_associations[@squares.index(square)][0].each() { |row| p "Row #{@rows.index(row)}"
+        @square_associations[@squares.index(square)][0].each() { |row| #p "Row #{@rows.index(row)}"
           if (row.include?(num))
           empty_spaces.delete_if() { |coordinates| @row_associations[@rows.index(row)].include?(coordinates) }
-          p "After elimination by row #{@rows.index(row)}: #{empty_spaces}"
+          # p "After elimination by row #{@rows.index(row)}: #{empty_spaces}"
         end
         }
       end
       if (empty_spaces.count() > 1)
-        @square_associations[@squares.index(square)][1].each() { |column| p "Column #{@columns.index(column)}"
+        @square_associations[@squares.index(square)][1].each() { |column| #p "Column #{@columns.index(column)}"
           if (column.include?(num))
           empty_spaces.delete_if() { |coordinates| @column_associations[@columns.index(column)].include?(coordinates) }
-          p "After elimination by column #{@columns.index(column)}: #{empty_spaces}"
+          # p "After elimination by column #{@columns.index(column)}: #{empty_spaces}"
         end
         }
       end
@@ -255,21 +255,52 @@ class Sudoku
       return "skip"
   end
 
-  def solve_square(square)
-    missing_numbers = missing_numbers(square)
-    p missing_numbers
-    p square
-    missing_numbers.each() { |number|
-      p @squares.index(quare)
-      p "Checking #{number}"
-      p change = crosshatch(quare, number)
-      unless (change == "skip" )
-        square = fill_in(change[0], change[1], change[2])
-      end
-      p missing_numbers
-      p square
-    }
+  # def solve_square(square)
+  #   missing_numbers = missing_numbers(square)
+  #   p missing_numbers
+  #   p square
+  #   missing_numbers.each() { |number|
+  #     p @squares.index(quare)
+  #     p "Checking #{number}"
+  #     p change = crosshatch(quare, number)
+  #     unless (change == "skip" )
+  #       square = fill_in(change[0], change[1], change[2])
+  #     end
+  #     p missing_numbers
+  #     p square
+  #   }
+  #
+  # end
 
+  def solve_sudoku(sudoku)
+    sudoku.rows.each() { |row| p row }
+    count = 0
+    p "Number of passes: #{count}"
+    until (sudoku.sudoku_complete?(sudoku) == true)
+      (0..8).each() { |squarenum|
+        # p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
+        # p sudoku_1.squares[squarenum]
+        # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+        sudoku.missing_numbers(sudoku.squares[squarenum]).each() { |num|
+          # p "Checking #{num}"
+          change = sudoku.crosshatch(sudoku.squares[squarenum], num)
+          unless (change == "skip")
+            sudoku.fill_in(change[0], change[1], change[2])
+          end
+          # p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
+          # p sudoku_1.squares[1]
+          # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+        }
+      }
+      count += 1
+      break if count >= 10
+      p "-------------------------"
+      sudoku.rows.each() { |row| p row }
+      p "Number of passes: #{count}"
+    end
+    if (sudoku.sudoku_complete?(sudoku) == true)
+      p "Sudoku puzzle complete!"
+    end
   end
 
 
@@ -402,6 +433,9 @@ c_sudoku_1 = Sudoku.new(c_sudoku_1_rows)
 # p sudoku_1.squares[1]
 # p sudoku_1.empty_spaces(sudoku_1.squares[1])
 
+
+## WORKING CODE TO CROSSHATCH A GIVEN SQUARE
+# sudoku_1.rows.each() { |row| p row }
 # p sudoku_1.missing_numbers(sudoku_1.squares[1])
 # p sudoku_1.squares[1]
 # # p sudoku_1.empty_spaces(sudoku_1.squares[1])
@@ -415,7 +449,157 @@ c_sudoku_1 = Sudoku.new(c_sudoku_1_rows)
 #   p sudoku_1.squares[1]
 #   # p sudoku_1.empty_spaces(sudoku_1.squares[1])
 # }
+# p "-------------------------"
+# sudoku_1.rows.each() { |row| p row }
 
+
+# sudoku_1.rows.each() { |row| p row }
+# (0..8).each() { |squarenum|
+# p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
+# p sudoku_1.squares[squarenum]
+# # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# sudoku_1.missing_numbers(sudoku_1.squares[squarenum]).each() { |num|
+#   p "Checking #{num}"
+#   p change = sudoku_1.crosshatch(sudoku_1.squares[squarenum], num)
+#   unless (change == "skip")
+#     sudoku_1.fill_in(change[0], change[1], change[2])
+#   end
+#   p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
+#   p sudoku_1.squares[1]
+#   # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# }
+# }
+# p "-------------------------"
+# sudoku_1.rows.each() { |row| p row }
+#
+# (0..8).each() { |squarenum|
+# p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
+# p sudoku_1.squares[squarenum]
+# # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# sudoku_1.missing_numbers(sudoku_1.squares[squarenum]).each() { |num|
+#   p "Checking #{num}"
+#   p change = sudoku_1.crosshatch(sudoku_1.squares[squarenum], num)
+#   unless (change == "skip")
+#     sudoku_1.fill_in(change[0], change[1], change[2])
+#   end
+#   p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
+#   p sudoku_1.squares[1]
+#   # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# }
+# }
+# p "-------------------------"
+# sudoku_1.rows.each() { |row| p row }
+#
+# (0..8).each() { |squarenum|
+# p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
+# p sudoku_1.squares[squarenum]
+# # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# sudoku_1.missing_numbers(sudoku_1.squares[squarenum]).each() { |num|
+#   p "Checking #{num}"
+#   p change = sudoku_1.crosshatch(sudoku_1.squares[squarenum], num)
+#   unless (change == "skip")
+#     sudoku_1.fill_in(change[0], change[1], change[2])
+#   end
+#   p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
+#   p sudoku_1.squares[1]
+#   # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# }
+# }
+# p "-------------------------"
+# sudoku_1.rows.each() { |row| p row }
+
+
+
+
+
+# sudoku_1.rows.each() { |row| p row }
+# count = 0
+# p "Number of passes: #{count}"
+# until (sudoku_1.sudoku_complete?(sudoku_1) == true)
+#   (0..8).each() { |squarenum|
+#     # p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
+#     # p sudoku_1.squares[squarenum]
+#     # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+#     sudoku_1.missing_numbers(sudoku_1.squares[squarenum]).each() { |num|
+#       # p "Checking #{num}"
+#       change = sudoku_1.crosshatch(sudoku_1.squares[squarenum], num)
+#       unless (change == "skip")
+#         sudoku_1.fill_in(change[0], change[1], change[2])
+#       end
+#       # p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
+#       # p sudoku_1.squares[1]
+#       # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+#     }
+#   }
+#   count += 1
+#   break if count >= 10
+#   p "-------------------------"
+#   sudoku_1.rows.each() { |row| p row }
+#   p "Number of passes: #{count}"
+# end
+# if (sudoku_1.sudoku_complete?(sudoku_1) == true)
+#   p "Sudoku puzzle complete!"
+# end
+
+sudoku_1.solve_sudoku(sudoku_1)
+
+
+
+
+
+
+# [0, 0, 2, 9, 8, 0, 5, 0, 0]
+# [4, 0, 0, 0, 7, 0, 0, 1, 3]
+# [0, 3, 9, 6, 0, 4, 0, 7, 0]
+# [2, 0, 0, 0, 5, 6, 4, 0, 0]
+# [8, 4, 0, 3, 0, 0, 2, 0, 1]
+# [9, 0, 7, 0, 0, 1, 0, 8, 6]
+# [6, 0, 0, 7, 0, 5, 1, 3, 0]
+# [0, 9, 1, 4, 0, 0, 0, 0, 5]
+# [0, 2, 0, 0, 3, 0, 6, 0, 8]
+#
+# [0, 0, 2, 9, 8, 3, 5, 6, 0]
+# [4, 0, 0, 5, 7, 0, 9, 1, 3]
+# [0, 3, 9, 6, 1, 4, 0, 7, 2]
+# [2, 1, 3, 8, 5, 6, 4, 9, 7]
+# [8, 4, 6, 3, 9, 7, 2, 5, 1]
+# [9, 0, 7, 0, 4, 1, 3, 8, 6]
+# [6, 0, 0, 7, 0, 5, 1, 3, 9]
+# [3, 9, 1, 4, 6, 8, 7, 2, 5]
+# [7, 2, 0, 1, 3, 9, 6, 0, 8]
+#
+# [1, 7, 2, 9, 8, 3, 5, 6, 4]
+# [4, 6, 8, 5, 7, 2, 9, 1, 3]
+# [5, 3, 9, 6, 1, 4, 8, 7, 2]
+# [2, 1, 3, 8, 5, 6, 4, 9, 7]
+# [8, 4, 6, 3, 9, 7, 2, 5, 1]
+# [9, 5, 7, 2, 4, 1, 3, 8, 6]
+# [6, 8, 0, 7, 2, 5, 1, 3, 9]
+# [3, 9, 1, 4, 6, 8, 7, 2, 5]
+# [7, 2, 5, 1, 3, 9, 6, 4, 8
+#
+# [1, 7, 2, 9, 8, 3, 5, 6, 4]
+# [4, 6, 8, 5, 7, 2, 9, 1, 3]
+# [5, 3, 9, 6, 1, 4, 8, 7, 2]
+# [2, 1, 3, 8, 5, 6, 4, 9, 7]
+# [8, 4, 6, 3, 9, 7, 2, 5, 1]
+# [9, 5, 7, 2, 4, 1, 3, 8, 6]
+# [6, 8, 4, 7, 2, 5, 1, 3, 9]
+# [3, 9, 1, 4, 6, 8, 7, 2, 5]
+# [7, 2, 5, 1, 3, 9, 6, 4, 8]
+
+# complete_square = Proc.new { |square, num|
+#   p "Checking #{num}"
+#   p change = sudoku_1.crosshatch(square, num)
+#   unless (change == "skip")
+#     sudoku_1.fill_in(change[0], change[1], change[2])
+#   end
+#   p sudoku_1.missing_numbers(square)
+#   p square
+
+
+  # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# }
 # sudoku_1.rows.each() { |row| p row }
 # sudoku_1.squares.each() { |square|
 #   missing_numbers = sudoku_1.missing_numbers(square)
@@ -431,12 +615,12 @@ c_sudoku_1 = Sudoku.new(c_sudoku_1_rows)
 #   sudoku_1.rows.each() { |row| p row }
 # }
 
-p sudoku_1.rows[2][4]
-p sudoku_1.columns[5][0]
-p sudoku_1.squares[2][3]
-p sudoku_1.rows[2][4].object_id()
-p sudoku_1.columns[5][0].object_id()
-p sudoku_1.squares[2][3].object_id()
+# p sudoku_1.rows[2][4]
+# p sudoku_1.columns[5][0]
+# p sudoku_1.squares[2][3]
+# p sudoku_1.rows[2][4].object_id()
+# p sudoku_1.columns[5][0].object_id()
+# p sudoku_1.squares[2][3].object_id()
 
 
 # p sudoku_1.column_associations[4]

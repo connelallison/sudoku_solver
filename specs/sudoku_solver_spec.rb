@@ -204,15 +204,25 @@ def test_empty_spaces_none_empty
   assert_equal([], result)
 end
 
-# For a given square and a given missing number, check which of the rows and columns passing through the square contain the number.
-# If exactly one row and one column do not contain the number, fill the number in.
-  # def test_crosshatch
-  #   assert_equal(0, @sudoku_1.rows[2][4])
-  #   assert_equal(0, @sudoku_1.columns[4][2])
-  #   assert_equal(0, @sudoku_1.squares[1][7])
-  #   @sudoku_1.crosshatch(@sudoku_1.squares[1], 1)
-  #   assert_equal(1, @sudoku_1.rows[2][4])
-  #   assert_equal(1, @sudoku_1.columns[4][2])
-  #   assert_equal(1, @sudoku_1.squares[1][7])
-  # end
+# For a given square and a given missing number, get a list of the empty spaces, and check which of the rows and columns passing through the square contain the number.
+# If a row/column contains the number, remove any empty spaces it passes through.
+# After checking each row/column, if one empty space remains, return an array of [row, column, number]. If more than one empty space remains, return "skip".
+  def test_crosshatch_success
+    result = @sudoku_1.crosshatch(@sudoku_1.squares[1], 1)
+    assert_equal([2, 4, 1], result)
+  end
+
+  def test_crosshatch_skip
+    result = @sudoku_1.crosshatch(@sudoku_1.squares[1], 2)
+    assert_equal("skip", result)
+  end
+
+  # For a given sudoku puzzle, for each square, find the missing numbers. For each missing number, attempt to crosshatch. If crosshatching returns an empty space and missing number, fill it in
+  # Repeat for every missing number in every square until a pass has been made over the entire puzzle. Then repeat this until the puzzle has been solved.
+  def test_solve_sudoku
+    assert_equal(false, @sudoku_1.sudoku_complete?(@sudoku_1))
+    @sudoku_1.solve_sudoku(@sudoku_1)
+    assert_equal(true, @sudoku_1.sudoku_complete?(@sudoku_1))
+  end
+
 end
