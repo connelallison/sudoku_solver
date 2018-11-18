@@ -98,41 +98,41 @@ class Sudoku
     [@rows[6][6], @rows[6][7], @rows[6][8], @rows[7][6], @rows[7][7], @rows[7][8], @rows[8][6], @rows[8][7], @rows[8][8]]
   ]
 
-    @row_associations = {
-      @rows[0] => [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8]],
-      @rows[1] => [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [1, 8]],
-      @rows[2] => [[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8]],
-      @rows[3] => [[3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5], [3, 6], [3, 7], [3, 8]],
-      @rows[4] => [[4, 0], [4, 1], [4, 2], [4, 3], [4, 4], [4, 5], [4, 6], [4, 7], [4, 8]],
-      @rows[5] => [[5, 0], [5, 1], [5, 2], [5, 3], [5, 4], [5, 5], [5, 6], [5, 7], [5, 8]],
-      @rows[6] => [[6, 0], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [6, 6], [6, 7], [6, 8]],
-      @rows[7] => [[7, 0], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5], [7, 6], [7, 7], [7, 8]],
-      @rows[8] => [[8, 0], [8, 1], [8, 2], [8, 3], [8, 4], [8, 5], [8, 6], [8, 7], [8, 8]]
-    }
+    @row_associations = [
+      [[0, 0], [0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [0, 7], [0, 8]],
+      [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [1, 8]],
+      [[2, 0], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [2, 6], [2, 7], [2, 8]],
+      [[3, 0], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5], [3, 6], [3, 7], [3, 8]],
+      [[4, 0], [4, 1], [4, 2], [4, 3], [4, 4], [4, 5], [4, 6], [4, 7], [4, 8]],
+      [[5, 0], [5, 1], [5, 2], [5, 3], [5, 4], [5, 5], [5, 6], [5, 7], [5, 8]],
+      [[6, 0], [6, 1], [6, 2], [6, 3], [6, 4], [6, 5], [6, 6], [6, 7], [6, 8]],
+      [[7, 0], [7, 1], [7, 2], [7, 3], [7, 4], [7, 5], [7, 6], [7, 7], [7, 8]],
+      [[8, 0], [8, 1], [8, 2], [8, 3], [8, 4], [8, 5], [8, 6], [8, 7], [8, 8]]
+    ]
 
-    @column_associations = {
-      @columns[0] => [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0]],
-      @columns[1] => [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1]],
-      @columns[2] => [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 2]],
-      @columns[3] => [[0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3]],
-      @columns[4] => [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4]],
-      @columns[5] => [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5], [8, 5]],
-      @columns[6] => [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6]],
-      @columns[7] => [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7], [8, 7]],
-      @columns[8] => [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8]]
-    }
+    @column_associations = [
+      [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0], [6, 0], [7, 0], [8, 0]],
+      [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1]],
+      [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 2]],
+      [[0, 3], [1, 3], [2, 3], [3, 3], [4, 3], [5, 3], [6, 3], [7, 3], [8, 3]],
+      [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4]],
+      [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5], [8, 5]],
+      [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6]],
+      [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7], [8, 7]],
+      [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8]]
+    ]
 
-    @square_associations = {
-      @squares[0] => [[@rows[0], @rows[1], @rows[2]], [@columns[0], @columns[1], @columns[2]], [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]]],
-      @squares[1] => [[@rows[0], @rows[1], @rows[2]], [@columns[3], @columns[4], @columns[5]], [[0, 3], [0, 4], [0, 5], [1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5]]],
-      @squares[2] => [[@rows[0], @rows[1], @rows[2]], [@columns[6], @columns[7], @columns[8]], [[0, 6], [0, 7], [0, 8], [1, 6], [1, 7], [1, 8], [2, 6], [2, 7], [2, 8]]],
-      @squares[3] => [[@rows[3], @rows[4], @rows[5]], [@columns[0], @columns[1], @columns[2]], [[3, 0], [3, 1], [3, 2], [4, 0], [4, 1], [4, 2], [5, 0], [5, 1], [5, 2]]],
-      @squares[4] => [[@rows[3], @rows[4], @rows[5]], [@columns[3], @columns[4], @columns[5]], [[3, 3], [3, 4], [3, 5], [4, 3], [4, 4], [4, 5], [5, 3], [5, 4], [5, 5]]],
-      @squares[5] => [[@rows[3], @rows[4], @rows[5]], [@columns[6], @columns[7], @columns[8]], [[3, 6], [3, 7], [3, 8], [4, 6], [4, 7], [4, 8], [5, 6], [5, 7], [5, 8]]],
-      @squares[6] => [[@rows[6], @rows[7], @rows[8]], [@columns[0], @columns[1], @columns[2]], [[6, 0], [6, 1], [6, 2], [7, 0], [7, 1], [7, 2], [8, 0], [8, 1], [8, 2]]],
-      @squares[7] => [[@rows[6], @rows[7], @rows[8]], [@columns[3], @columns[4], @columns[5]], [[6, 3], [6, 4], [6, 5], [7, 3], [7, 4], [7, 5], [8, 3], [8, 4], [8, 5]]],
-      @squares[8] => [[@rows[6], @rows[7], @rows[8]], [@columns[6], @columns[7], @columns[8]], [[6, 6], [6, 7], [6, 8], [7, 6], [7, 7], [7, 8], [8, 6], [8, 7], [8, 8]]]
-    }
+    @square_associations = [
+      [[@rows[0], @rows[1], @rows[2]], [@columns[0], @columns[1], @columns[2]], [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]]],
+      [[@rows[0], @rows[1], @rows[2]], [@columns[3], @columns[4], @columns[5]], [[0, 3], [0, 4], [0, 5], [1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5]]],
+      [[@rows[0], @rows[1], @rows[2]], [@columns[6], @columns[7], @columns[8]], [[0, 6], [0, 7], [0, 8], [1, 6], [1, 7], [1, 8], [2, 6], [2, 7], [2, 8]]],
+      [[@rows[3], @rows[4], @rows[5]], [@columns[0], @columns[1], @columns[2]], [[3, 0], [3, 1], [3, 2], [4, 0], [4, 1], [4, 2], [5, 0], [5, 1], [5, 2]]],
+      [[@rows[3], @rows[4], @rows[5]], [@columns[3], @columns[4], @columns[5]], [[3, 3], [3, 4], [3, 5], [4, 3], [4, 4], [4, 5], [5, 3], [5, 4], [5, 5]]],
+      [[@rows[3], @rows[4], @rows[5]], [@columns[6], @columns[7], @columns[8]], [[3, 6], [3, 7], [3, 8], [4, 6], [4, 7], [4, 8], [5, 6], [5, 7], [5, 8]]],
+      [[@rows[6], @rows[7], @rows[8]], [@columns[0], @columns[1], @columns[2]], [[6, 0], [6, 1], [6, 2], [7, 0], [7, 1], [7, 2], [8, 0], [8, 1], [8, 2]]],
+      [[@rows[6], @rows[7], @rows[8]], [@columns[3], @columns[4], @columns[5]], [[6, 3], [6, 4], [6, 5], [7, 3], [7, 4], [7, 5], [8, 3], [8, 4], [8, 5]]],
+      [[@rows[6], @rows[7], @rows[8]], [@columns[6], @columns[7], @columns[8]], [[6, 6], [6, 7], [6, 8], [7, 6], [7, 7], [7, 8], [8, 6], [8, 7], [8, 8]]]
+    ]
 
     @sudoku = [@rows, @columns, @squares]
 
@@ -170,6 +170,18 @@ class Sudoku
     [@rows[6][3], @rows[6][4], @rows[6][5], @rows[7][3], @rows[7][4], @rows[7][5], @rows[8][3], @rows[8][4], @rows[8][5]],
     [@rows[6][6], @rows[6][7], @rows[6][8], @rows[7][6], @rows[7][7], @rows[7][8], @rows[8][6], @rows[8][7], @rows[8][8]]
   ]
+    @square_associations = [
+    [[@rows[0], @rows[1], @rows[2]], [@columns[0], @columns[1], @columns[2]], [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]]],
+    [[@rows[0], @rows[1], @rows[2]], [@columns[3], @columns[4], @columns[5]], [[0, 3], [0, 4], [0, 5], [1, 3], [1, 4], [1, 5], [2, 3], [2, 4], [2, 5]]],
+    [[@rows[0], @rows[1], @rows[2]], [@columns[6], @columns[7], @columns[8]], [[0, 6], [0, 7], [0, 8], [1, 6], [1, 7], [1, 8], [2, 6], [2, 7], [2, 8]]],
+    [[@rows[3], @rows[4], @rows[5]], [@columns[0], @columns[1], @columns[2]], [[3, 0], [3, 1], [3, 2], [4, 0], [4, 1], [4, 2], [5, 0], [5, 1], [5, 2]]],
+    [[@rows[3], @rows[4], @rows[5]], [@columns[3], @columns[4], @columns[5]], [[3, 3], [3, 4], [3, 5], [4, 3], [4, 4], [4, 5], [5, 3], [5, 4], [5, 5]]],
+    [[@rows[3], @rows[4], @rows[5]], [@columns[6], @columns[7], @columns[8]], [[3, 6], [3, 7], [3, 8], [4, 6], [4, 7], [4, 8], [5, 6], [5, 7], [5, 8]]],
+    [[@rows[6], @rows[7], @rows[8]], [@columns[0], @columns[1], @columns[2]], [[6, 0], [6, 1], [6, 2], [7, 0], [7, 1], [7, 2], [8, 0], [8, 1], [8, 2]]],
+    [[@rows[6], @rows[7], @rows[8]], [@columns[3], @columns[4], @columns[5]], [[6, 3], [6, 4], [6, 5], [7, 3], [7, 4], [7, 5], [8, 3], [8, 4], [8, 5]]],
+    [[@rows[6], @rows[7], @rows[8]], [@columns[6], @columns[7], @columns[8]], [[6, 6], [6, 7], [6, 8], [7, 6], [7, 7], [7, 8], [8, 6], [8, 7], [8, 8]]]
+  ]
+    @sudoku = [@rows, @columns, @squares]
   end
 
   def coordinate_from_array(row_array, column_array)
@@ -181,14 +193,21 @@ class Sudoku
   end
 
   def missing_numbers(unit)
+    # reject may cause trouble with returning nil - keep an eye on this
     @complete_unit.reject() { |num| unit.include?(num) }
   end
 
   def empty_spaces(square)
-    empty_spaces = @square_associations[square][2].select() {
+    empty_spaces = @square_associations[@squares.index(square)][2].select() {
       |coordinates| (coordinate(coordinates[0], coordinates[1]) == 0)
     }
-    return empty_spaces
+    # p empty_spaces
+    # p @square_associations[@squares.index(square)][2]
+    if (empty_spaces != nil)
+      return empty_spaces
+    else
+      return "skip"
+    end
   end
 
   def fill_in(row, column, num)
@@ -198,42 +217,61 @@ class Sudoku
 
   def crosshatch(square, num)
     # p square
+    # p "test"
+    # p @square_associations[@squares.index(square)][2]
     empty_spaces = empty_spaces(square)
-    p empty_spaces
-    missing_numbers = @complete_unit.reject() { |number| square.include?(number) }
+    # p "Before elimination: #{empty_spaces}"
+    # missing_numbers = @complete_unit.reject() { |number| square.include?(number) }
     # p missing_numbers
-    @square_associations[square][0].each() { |row| if (row.include?(num))
-      empty_spaces.reject!() { |coordinates| @row_associations[row].include?(coordinates) }
-      p empty_spaces
+    unless (empty_spaces == "skip")
+      if (empty_spaces.count() > 1)
+        @square_associations[@squares.index(square)][0].each() { |row| p "Row #{@rows.index(row)}"
+          if (row.include?(num))
+          empty_spaces.delete_if() { |coordinates| @row_associations[@rows.index(row)].include?(coordinates) }
+          p "After elimination by row #{@rows.index(row)}: #{empty_spaces}"
+        end
+        }
+      end
+      if (empty_spaces.count() > 1)
+        @square_associations[@squares.index(square)][1].each() { |column| p "Column #{@columns.index(column)}"
+          if (column.include?(num))
+          empty_spaces.delete_if() { |coordinates| @column_associations[@columns.index(column)].include?(coordinates) }
+          p "After elimination by column #{@columns.index(column)}: #{empty_spaces}"
+        end
+        }
+      end
+      if (empty_spaces.count() == 1)
+        # @rows[empty_spaces[0][0]][empty_spaces[0][1]] =  num
+        # reassign()
+        # p square
+        # p square
+        # p square
+        # p square
+        # missing_numbers = @complete_unit.reject() { |number| square.include?(number) }
+        # p missing_numbers
+        return [empty_spaces[0][0], empty_spaces[0][1], num]
+      end
     end
-    }
-    @square_associations[square][1].each() { |column| if (column.include?(num))
-      empty_spaces.reject!() { |coordinates| @column_associations[column].include?(coordinates) }
-      p empty_spaces
-    end
-    }
-    if (empty_spaces.count() == 1)
-      # @rows[empty_spaces[0][0]][empty_spaces[0][1]] =  num
-      # reassign()
-      # p square
-      # p square
-      # p square
-      # p square
-      # missing_numbers = @complete_unit.reject() { |number| square.include?(number) }
-      p missing_numbers
-      return [empty_spaces[0][0], empty_spaces[0][1], num]
-    end
+      return "skip"
   end
 
   def solve_square(square)
     missing_numbers = missing_numbers(square)
     p missing_numbers
     p square
-    change = crosshatch(square, missing_numbers[3])
-    p square
-    missing_numbers = missing_numbers(square)
-    p missing_numbers
+    missing_numbers.each() { |number|
+      p @squares.index(quare)
+      p "Checking #{number}"
+      p change = crosshatch(quare, number)
+      unless (change == "skip" )
+        square = fill_in(change[0], change[1], change[2])
+      end
+      p missing_numbers
+      p square
+    }
+
   end
+
 
 end
 
@@ -326,27 +364,85 @@ c_sudoku_1 = Sudoku.new(c_sudoku_1_rows)
 
 # p sudoku_1.squares[1]
 # p sudoku_1.empty_spaces(sudoku_1.squares[1])
-p sudoku_1.square_associations[sudoku_1.squares[1]][2]
-p sudoku_1.rows[2]
-p sudoku_1.columns[4]
-p sudoku_1.squares[1]
-change = sudoku_1.crosshatch(sudoku_1.squares[1], 1)
-p sudoku_1.square_associations[sudoku_1.squares[1]][2]
-sudoku_1.fill_in(change[0], change[1], change[2])
-p sudoku_1.square_associations[sudoku_1.squares[1]][2]
-p sudoku_1.missing_numbers(sudoku_1.squares[1])
-p sudoku_1.rows[2]
-p sudoku_1.columns[4]
-p sudoku_1.squares[1]
-p sudoku_1.missing_numbers(sudoku_1.rows[2])
-p sudoku_1.missing_numbers(sudoku_1.columns[4])
-p sudoku_1.missing_numbers(sudoku_1.squares[1])
-change = sudoku_1.crosshatch(sudoku_1.squares[1], 3)
-sudoku_1.fill_in(change[0], change[1], change[2])
-p sudoku_1.rows[2]
-p sudoku_1.columns[4]
-p sudoku_1.squares[1]
+# p sudoku_1.square_associations[1][2]
+# p sudoku_1.rows[2]
+# p sudoku_1.columns[4]
+
+# p sudoku_1.missing_numbers(sudoku_1.squares[1])
 # p sudoku_1.squares[1]
+# p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# change = sudoku_1.crosshatch(sudoku_1.squares[1], 1)
+# # p sudoku_1.square_associations[1][2]
+# sudoku_1.fill_in(change[0], change[1], change[2])
+# # p sudoku_1.square_associations[1][2]
+# p sudoku_1.missing_numbers(sudoku_1.squares[1])
+# # p sudoku_1.rows[2]
+# # p sudoku_1.columns[4]
+# p sudoku_1.squares[1]
+# p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# # p sudoku_1.missing_numbers(sudoku_1.rows[2])
+# # p sudoku_1.missing_numbers(sudoku_1.columns[4])
+# # p sudoku_1.missing_numbers(sudoku_1.squares[1])
+# change = sudoku_1.crosshatch(sudoku_1.squares[1], 2)
+# # p sudoku_1.rows[2]
+# # p sudoku_1.columns[4]
+# p sudoku_1.missing_numbers(sudoku_1.squares[1])
+# p sudoku_1.squares[1]
+# p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# change = sudoku_1.crosshatch(sudoku_1.squares[1], 3)
+# sudoku_1.fill_in(change[0], change[1], change[2])
+# p sudoku_1.missing_numbers(sudoku_1.squares[1])
+# # p sudoku_1.rows[2]
+# # p sudoku_1.columns[4]
+# p sudoku_1.squares[1]
+# p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# change = sudoku_1.crosshatch(sudoku_1.squares[1], 5)
+# sudoku_1.fill_in(change[0], change[1], change[2])
+# p sudoku_1.missing_numbers(sudoku_1.squares[1])
+# p sudoku_1.squares[1]
+# p sudoku_1.empty_spaces(sudoku_1.squares[1])
+
+# p sudoku_1.missing_numbers(sudoku_1.squares[1])
+# p sudoku_1.squares[1]
+# # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# sudoku_1.missing_numbers(sudoku_1.squares[1]).each() { |num|
+#   p "Checking #{num}"
+#   p change = sudoku_1.crosshatch(sudoku_1.squares[1], num)
+#   unless (change == "skip")
+#     sudoku_1.fill_in(change[0], change[1], change[2])
+#   end
+#   p sudoku_1.missing_numbers(sudoku_1.squares[1])
+#   p sudoku_1.squares[1]
+#   # p sudoku_1.empty_spaces(sudoku_1.squares[1])
+# }
+
+# sudoku_1.rows.each() { |row| p row }
+# sudoku_1.squares.each() { |square|
+#   missing_numbers = sudoku_1.missing_numbers(square)
+#   p "-------------------------"
+#   p missing_numbers
+#   missing_numbers.each() { |num|
+#     change = sudoku_1.crosshatch(square, num)
+#     unless (change == "skip")
+#       sudoku_1.fill_in(change[0], change[1], change[2])
+#     end
+#   }
+#   p "-------------------------"
+#   sudoku_1.rows.each() { |row| p row }
+# }
+
+p sudoku_1.rows[2][4]
+p sudoku_1.columns[5][0]
+p sudoku_1.squares[2][3]
+p sudoku_1.rows[2][4].object_id()
+p sudoku_1.columns[5][0].object_id()
+p sudoku_1.squares[2][3].object_id()
+
+
+# p sudoku_1.column_associations[4]
+# p [[1, 3], [1, 5]].delete_if() { |coordinates| sudoku_1.column_associations[4].include?(coordinates) }
+# p sudoku_1.column_associations[5]
+# p [[1, 3], [1, 5]].delete_if() { |coordinates| sudoku_1.column_associations[5].include?(coordinates) }
 
 # p sudoku_1.squares[1]
 # sudoku_1.solve_square(sudoku_1.squares[1])
@@ -358,3 +454,6 @@ p sudoku_1.squares[1]
   # end
   # }
   # p empty_spaces
+
+
+# sudoku_1.solve_square(sudoku_1.squares[1])
