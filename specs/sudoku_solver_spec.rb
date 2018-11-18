@@ -130,6 +130,7 @@ class TestSudokuSolver < Minitest::Test
     assert_equal(false, @sudoku_1.unit_complete?(@sudoku_1.columns[7]))
   end
 
+# Check if the entire sudoku puzzle has been solved - with 1..9 exactly once in each row, column, and square.
   def test_complete_sudoku_true
     assert_equal(true, @c_sudoku_1.sudoku_complete?(@c_sudoku_1))
   end
@@ -137,18 +138,81 @@ class TestSudokuSolver < Minitest::Test
   def test_complete_sudoku_false
     assert_equal(false, @sudoku_1.sudoku_complete?(@sudoku_1))
   end
-  # def test_in_square_true
-  #   in_square(@square_1, )
-  # end
-  #
-  # def test_in_square_false
-  #
-  # end
-  #
-  # def test_crosshatch_row_true
-  #
-  #
-  # end
 
+# After changing a value in a row array, update the column arrays and square arrays to match.
+  def test_reassign_one_value
+    assert_equal(0, @sudoku_1.rows[2][4])
+    assert_equal(0, @sudoku_1.columns[4][2])
+    assert_equal(0, @sudoku_1.squares[1][7])
+    @sudoku_1.rows[2][4] = 1
+    @sudoku_1.reassign()
+    assert_equal(1, @sudoku_1.rows[2][4])
+    assert_equal(1, @sudoku_1.columns[4][2])
+    assert_equal(1, @sudoku_1.squares[1][7])
+  end
+# After updating the entire rows array, update the entire columns array and squares array to match.
+  def test_reassign_all_values
+    @sudoku_1.rows = @c_sudoku_1_rows
+    @sudoku_1.reassign()
+    assert_equal(@c_sudoku_1.rows, @sudoku_1.rows)
+    assert_equal(@c_sudoku_1.columns, @sudoku_1.columns)
+    assert_equal(@c_sudoku_1.squares, @sudoku_1.squares)
+  end
 
+# Take a row and a column as arrays and return the value at the point where they intersect.
+  def test_coordinate_from_array
+    result = @sudoku_1.coordinate_from_array(@sudoku_1.rows[2], @sudoku_1.columns[4])
+    assert_equal(0, result)
+  end
+
+# Take a row and a column as coordinates (row, column) and return the value at the point where they intersect.
+  def test_coordinate
+    result = @sudoku_1.coordinate(2, 4)
+    assert_equal(0, result)
+  end
+
+# Given a row and a column, change the value of the point where they intersect, and update the arrays.
+  def test_fill_in
+    assert_equal(0, @sudoku_1.rows[2][4])
+    assert_equal(0, @sudoku_1.columns[4][2])
+    assert_equal(0, @sudoku_1.squares[1][7])
+    @sudoku_1.fill_in(2, 4, 1)
+    assert_equal(1, @sudoku_1.rows[2][4])
+    assert_equal(1, @sudoku_1.columns[4][2])
+    assert_equal(1, @sudoku_1.squares[1][7])
+  end
+
+# Return an array of the numbers in a row/column/square that are not yet filled in.
+  def test_missing_numbers_some_missing
+    result = @sudoku_1.missing_numbers(@sudoku_1.squares[3])
+    assert_equal([1, 3, 5, 6], result)
+  end
+
+  def test_missing_numbers_none_missing
+    result = @c_sudoku_1.missing_numbers(@c_sudoku_1.squares[3])
+    assert_equal([], result)
+  end
+
+# Return an array of the points (as (row, column) co-ordinates) in a row/column/square that are not yet filled in.
+def test_empty_spaces_some_empty
+  result = @sudoku_1.empty_spaces(@sudoku_1.squares[1])
+  assert_equal([[0, 5], [1, 3], [1, 5], [2, 4]], result)
+end
+
+def test_empty_spaces_none_empty
+  result = @c_sudoku_1.empty_spaces(@c_sudoku_1.squares[1])
+  assert_equal([], result)
+end
+
+# For a given square and a given missing number, check which of the rows and columns passing through the square contain the number.
+# If exactly one row and one column do not contain the number, fill the number in.
+  # def test_crosshatch
+  #   assert_equal(0, @sudoku_1.rows[2][4])
+  #   assert_equal(0, @sudoku_1.columns[4][2])
+  #   assert_equal(0, @sudoku_1.squares[1][7])
+  #   @sudoku_1.crosshatch(@sudoku_1.squares[1], 1)
+  #   assert_equal(1, @sudoku_1.rows[2][4])
+  #   assert_equal(1, @sudoku_1.columns[4][2])
+  #   assert_equal(1, @sudoku_1.squares[1][7])
+  # end
 end
