@@ -185,10 +185,10 @@ class Sudoku
   end
 
   def empty_spaces(square)
-    @empty_spaces = @square_associations[square][2].select() {
+    empty_spaces = @square_associations[square][2].select() {
       |coordinates| (coordinate(coordinates[0], coordinates[1]) == 0)
     }
-
+    return empty_spaces
   end
 
   def fill_in(row, column, num)
@@ -197,7 +197,7 @@ class Sudoku
   end
 
   def crosshatch(square, num)
-    p square
+    # p square
     empty_spaces = empty_spaces(square)
     p empty_spaces
     missing_numbers = @complete_unit.reject() { |number| square.include?(number) }
@@ -213,15 +213,15 @@ class Sudoku
     end
     }
     if (empty_spaces.count() == 1)
-      @rows[empty_spaces[0][0]][empty_spaces[0][1]] =  num
-      reassign()
+      # @rows[empty_spaces[0][0]][empty_spaces[0][1]] =  num
+      # reassign()
       # p square
       # p square
       # p square
       # p square
       # missing_numbers = @complete_unit.reject() { |number| square.include?(number) }
-      # p missing_numbers
-      return square
+      p missing_numbers
+      return [empty_spaces[0][0], empty_spaces[0][1], num]
     end
   end
 
@@ -229,7 +229,7 @@ class Sudoku
     missing_numbers = missing_numbers(square)
     p missing_numbers
     p square
-    square = crosshatch(square, missing_numbers[3])
+    change = crosshatch(square, missing_numbers[3])
     p square
     missing_numbers = missing_numbers(square)
     p missing_numbers
@@ -326,11 +326,30 @@ c_sudoku_1 = Sudoku.new(c_sudoku_1_rows)
 
 # p sudoku_1.squares[1]
 # p sudoku_1.empty_spaces(sudoku_1.squares[1])
-# p sudoku_1.crosshatch(sudoku_1.squares[1], 1)
+p sudoku_1.square_associations[sudoku_1.squares[1]][2]
+p sudoku_1.rows[2]
+p sudoku_1.columns[4]
+p sudoku_1.squares[1]
+change = sudoku_1.crosshatch(sudoku_1.squares[1], 1)
+p sudoku_1.square_associations[sudoku_1.squares[1]][2]
+sudoku_1.fill_in(change[0], change[1], change[2])
+p sudoku_1.square_associations[sudoku_1.squares[1]][2]
+p sudoku_1.missing_numbers(sudoku_1.squares[1])
+p sudoku_1.rows[2]
+p sudoku_1.columns[4]
+p sudoku_1.squares[1]
+p sudoku_1.missing_numbers(sudoku_1.rows[2])
+p sudoku_1.missing_numbers(sudoku_1.columns[4])
+p sudoku_1.missing_numbers(sudoku_1.squares[1])
+change = sudoku_1.crosshatch(sudoku_1.squares[1], 3)
+sudoku_1.fill_in(change[0], change[1], change[2])
+p sudoku_1.rows[2]
+p sudoku_1.columns[4]
+p sudoku_1.squares[1]
 # p sudoku_1.squares[1]
 
 # p sudoku_1.squares[1]
-sudoku_1.solve_square(sudoku_1.squares[1])
+# sudoku_1.solve_square(sudoku_1.squares[1])
 # p sudoku_1.squares[1]
   # empty_spaces = sudoku_1.empty_spaces(sudoku_1.squares[1])
   # p empty_spaces
