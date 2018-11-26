@@ -135,7 +135,7 @@ end
 
 # For a given square and a given missing number, get a list of the empty spaces, and check which of the rows and columns passing through the square contain the number.
 # If a row/column contains the number, remove any empty spaces it passes through.
-# After checking each row/column, if one empty space remains, return an array of [row, column, number]. If more than one empty space remains, return "skip".
+# After checking each row/column, if one empty space remains, return an array of [row, column, number]. If more than one empty space remains, return :skip.
   def test_crosshatch_success
     result = @sudoku_1.crosshatch(@sudoku_1.squares[1], 1)
     assert_equal([2, 4, 1], result)
@@ -143,7 +143,7 @@ end
 
   def test_crosshatch_skip
     result = @sudoku_1.crosshatch(@sudoku_1.squares[1], 2)
-    assert_equal("skip", result)
+    assert_equal(:skip, result)
   end
 
   # For a given sudoku puzzle, for each square, find the missing numbers. For each missing number, attempt to crosshatch. If crosshatching returns an empty space and missing number, fill it in

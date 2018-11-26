@@ -1,6 +1,6 @@
 
 class Sudoku
-  attr_accessor :sudoku, :rows, :columns, :squares, :row_associations, :column_associations, :square_associations, :complete_unit#, :row_1, :row_2, :row_4, :row_5, :row_6, :row_7, :row_8, :row_9, :column_1, :column_2, :column_4, :column_5, :column_6, :column_7, :column_8, :column_9, :square_1, :square_2, :square_4, :square_5, :square_6, :square_7, :square_8, :square_9
+  attr_accessor :sudoku, :rows, :columns, :squares, :row_associations, :column_associations, :square_associations, :complete_unit
   def initialize(sudoku_rows)
 
     @rows = [sudoku_rows[0], sudoku_rows[1], sudoku_rows[2], sudoku_rows[3], sudoku_rows[4], sudoku_rows[5], sudoku_rows[6], sudoku_rows[7], sudoku_rows[8]]
@@ -130,7 +130,7 @@ class Sudoku
     if (empty_spaces != nil)
       return empty_spaces
     else
-      return "skip"
+      return :skip
     end
   end
 
@@ -142,7 +142,7 @@ class Sudoku
   def crosshatch(square, num)
     empty_spaces = empty_spaces(square)
     # p "Before elimination: #{empty_spaces}"
-    unless (empty_spaces == "skip")
+    unless (empty_spaces == :skip)
       if (empty_spaces.count() > 1)
         @square_associations[@squares.index(square)][0].each() { |row| #p "Row #{@rows.index(row)}"
           if (row.include?(num))
@@ -163,7 +163,7 @@ class Sudoku
         return [empty_spaces[0][0], empty_spaces[0][1], num]
       end
     end
-      return "skip"
+      return :skip
   end
 
   def solve_sudoku(sudoku)
@@ -178,7 +178,7 @@ class Sudoku
         sudoku.missing_numbers(sudoku.squares[squarenum]).each() { |num|
           # p "Checking #{num}"
           change = sudoku.crosshatch(sudoku.squares[squarenum], num)
-          unless (change == "skip")
+          unless (change == :skip)
             sudoku.fill_in(change[0], change[1], change[2])
           end
           # p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
@@ -196,8 +196,6 @@ class Sudoku
       p "Sudoku puzzle complete!"
     end
   end
-
-
 end
 
 sudoku_1_rows = [
@@ -212,6 +210,8 @@ sudoku_1_rows = [
   [0, 2, 0, 0, 3, 0, 6, 0, 8]
 ]
 sudoku_1 = Sudoku.new(sudoku_1_rows)
+sudoku_1.solve_sudoku(sudoku_1)
+
 
 c_sudoku_1_rows = [
 [1, 7, 2, 9, 8, 3, 5, 6, 4],
@@ -226,8 +226,76 @@ c_sudoku_1_rows = [
 ]
 c_sudoku_1 = Sudoku.new(c_sudoku_1_rows)
 
-## WORKING METHOD TO SOLVE SUDOKU PUZZLE
+
+sudoku_2_rows = [
+  [1, 0, 0, 0, 0, 7, 0, 9, 0],
+  [0, 3, 0, 0, 2, 0, 0, 0, 8],
+  [0, 0, 9, 6, 0, 0, 5, 0, 0],
+  [0, 0, 5, 3, 0, 0, 9, 0, 0],
+  [0, 1, 0, 0, 8, 0, 0, 0, 2],
+  [6, 0, 0, 0, 0, 4, 0, 0, 0],
+  [3, 0, 0, 0, 0, 0, 0, 1, 0],
+  [0, 4, 0, 0, 0, 0, 0, 0, 7],
+  [0, 0, 7, 0, 0, 0, 3, 0, 0]
+]
+sudoku_2 = Sudoku.new(sudoku_2_rows)
+
+sudoku_3_rows = [
+  [9, 0, 8, 0, 5, 7, 0, 4, 1],
+  [0, 5, 0, 0, 0, 0, 6, 0, 2],
+  [6, 1, 0, 0, 2, 3, 0, 0, 0],
+  [0, 0, 9, 4, 0, 0, 0, 0, 8],
+  [5, 8, 0, 0, 0, 0, 0, 1, 7],
+  [1, 0, 0, 0, 0, 8, 2, 0, 0],
+  [0, 0, 0, 3, 8, 0, 0, 2, 9],
+  [2, 0, 5, 0, 0, 0, 0, 6, 0],
+  [8, 3, 0, 2, 6, 0, 7, 0, 4]
+]
+sudoku_3 = Sudoku.new(sudoku_3_rows)
+
+sudoku_4_rows = [
+  [3, 0, 0, 9, 0, 0, 1, 4, 0],
+  [0, 0, 0, 0, 0, 0, 0, 5, 6],
+  [0, 7, 0, 0, 4, 0, 8, 0, 9],
+  [7, 0, 0, 3, 0, 8, 9, 0, 0],
+  [0, 6, 9, 0, 0, 0, 7, 3, 0],
+  [0, 0, 3, 7, 0, 2, 0, 0, 5],
+  [1, 0, 7, 0, 3, 0, 0, 8, 0],
+  [4, 3, 0, 0, 0, 0, 0, 0, 0],
+  [0, 8, 6, 0, 0, 4, 0, 0, 3]
+]
+sudoku_4 = Sudoku.new(sudoku_4_rows)
+
+sudoku_5_rows = [
+  [8, 7, 6, 4, 0, 0, 3, 1, 5],
+  [0, 5, 0, 8, 0, 1, 6, 0, 0],
+  [0, 0, 1, 6, 5, 7, 0, 0, 0],
+  [4, 0, 0, 5, 2, 8, 0, 0, 0],
+  [5, 1, 7, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 9, 5, 3],
+  [1, 3, 0, 0, 8, 0, 0, 2, 9],
+  [0, 0, 9, 0, 0, 3, 5, 0, 6],
+  [0, 8, 0, 0, 4, 5, 1, 0, 0]
+]
+sudoku_5 = Sudoku.new(sudoku_5_rows)
+
+sudoku_6_rows = [
+  [0 ,7, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 5, 4, 0, 0, 0, 0],
+  [0, 1, 0, 0, 0, 8, 3, 4, 0],
+  [0, 5, 9, 0, 0, 2, 0, 6, 0],
+  [0, 0, 6, 0, 0, 3, 2, 0, 0],
+  [2, 0, 0, 0, 0, 1, 4, 8, 0],
+  [0, 0, 0, 8, 3, 0, 1, 0, 0],
+  [0, 0, 0, 0, 0, 9, 0, 0, 0],
+  [0, 2, 0, 0, 0, 0, 8, 3, 0]
+]
+sudoku_6 = Sudoku.new(sudoku_6_rows)
+
+## WORKING METHOD TO SOLVE EASY SUDOKU PUZZLE
 # sudoku_1.solve_sudoku(sudoku_1)
+
+# sudoku_2.solve_sudoku(sudoku_2)
 
 
 ## WORKING CODE TO CROSSHATCH A GIVEN SQUARE
@@ -238,7 +306,7 @@ c_sudoku_1 = Sudoku.new(c_sudoku_1_rows)
 # sudoku_1.missing_numbers(sudoku_1.squares[1]).each() { |num|
 #   p "Checking #{num}"
 #   p change = sudoku_1.crosshatch(sudoku_1.squares[1], num)
-#   unless (change == "skip")
+#   unless (change == :skip)
 #     sudoku_1.fill_in(change[0], change[1], change[2])
 #   end
 #   p sudoku_1.missing_numbers(sudoku_1.squares[1])
@@ -261,7 +329,7 @@ c_sudoku_1 = Sudoku.new(c_sudoku_1_rows)
 #     sudoku_1.missing_numbers(sudoku_1.squares[squarenum]).each() { |num|
 #       # p "Checking #{num}"
 #       change = sudoku_1.crosshatch(sudoku_1.squares[squarenum], num)
-#       unless (change == "skip")
+#       unless (change == :skip)
 #         sudoku_1.fill_in(change[0], change[1], change[2])
 #       end
 #       # p sudoku_1.missing_numbers(sudoku_1.squares[squarenum])
